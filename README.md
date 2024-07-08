@@ -73,7 +73,7 @@ Response:
     }
 }
 ```
-###Shak Tarjetas
+### Shak Tarjetas
 **POST /shak-tarjetas/register**
 
 Registers a unique identifier.
@@ -164,7 +164,7 @@ Response:
     "identifier": "PBO1234"
 }
 ```
-###Shak Multas
+### Shak Multas
 **POST /shak-multas/multas**
 
 Creates a new fine.
