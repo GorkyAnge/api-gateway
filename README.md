@@ -30,7 +30,7 @@ The API Gateway acts as a single entry point for various services, including:
 To start the server, run:
 
 ```bash
-npm start
+npm src/app.js
 ```
 The server will run at http://localhost:3000.
 
