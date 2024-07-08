@@ -1,0 +1,382 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Gateway",
+      "version": "1.0.0",
+      "description": "API Gateway for integrating multiple services"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Fake Payment Portal",
+        "description": "API para simular pagos con tarjeta"
+      },
+      {
+        "name": "Shak Tarjetas",
+        "description": "API para gestionar tarjetas y recargas"
+      },
+      {
+        "name": "Shak Multas",
+        "description": "API para gestionar multas"
+      }
+    ],
+    "paths": {
+      "/fake-payment-portal/payment/card": {
+        "post": {
+          "summary": "Simula pagos con tarjeta",
+          "tags": ["Fake Payment Portal"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "app_name": { "type": "string" },
+                    "service": { "type": "string" },
+                    "customer_email": { "type": "string" },
+                    "card_type": { "type": "string" },
+                    "card_holder_name": { "type": "string" },
+                    "card_number": { "type": "string" },
+                    "expiryMonth": { "type": "string" },
+                    "expiryYear": { "type": "string" },
+                    "cvv": { "type": "string" },
+                    "amount": { "type": "string" },
+                    "currency": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Transacción exitosa",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": { "type": "boolean" },
+                      "message": { "type": "string" },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "message": { "type": "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-tarjetas/register": {
+        "post": {
+          "summary": "Registra un identificador único",
+          "tags": ["Shak Tarjetas"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "identifier": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Identificador registrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": { "type": "string" },
+                      "identifier": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-tarjetas/recharge": {
+        "post": {
+          "summary": "Recarga un identificador único",
+          "tags": ["Shak Tarjetas"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "app_name": { "type": "string" },
+                    "service": { "type": "string" },
+                    "customer_email": { "type": "string" },
+                    "card_type": { "type": "string" },
+                    "card_holder_name": { "type": "string" },
+                    "card_number": { "type": "string" },
+                    "expiryMonth": { "type": "string" },
+                    "expiryYear": { "type": "string" },
+                    "cvv": { "type": "string" },
+                    "amount": { "type": "string" },
+                    "currency": { "type": "string" },
+                    "identifier": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Recarga exitosa",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": { "type": "string" },
+                      "newBalance": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-tarjetas/charge": {
+        "post": {
+          "summary": "Cobra un monto de un identificador único",
+          "tags": ["Shak Tarjetas"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "identifier": { "type": "string" },
+                    "amount": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cobro realizado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": { "type": "string" },
+                      "identifier": { "type": "string" },
+                      "newBalance": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-tarjetas/checkIdentifier": {
+        "post": {
+          "summary": "Verifica si un identificador existe",
+          "tags": ["Shak Tarjetas"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "identifier": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Identificador existe",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": { "type": "string" },
+                      "identifier": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-multas/multas": {
+        "post": {
+          "summary": "Crea una nueva multa",
+          "tags": ["Shak Multas"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "valor": { "type": "number" },
+                    "descripcion": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Multa creada con éxito",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "mensaje": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-multas/multas/pagar": {
+        "post": {
+          "summary": "Paga una multa existente",
+          "tags": ["Shak Multas"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "multaId": { "type": "string" },
+                    "paymentDetails": {
+                      "type": "object",
+                      "properties": {
+                        "app_name": { "type": "string" },
+                        "service": { "type": "string" },
+                        "customer_email": { "type": "string" },
+                        "card_type": { "type": "string" },
+                        "card_holder_name": { "type": "string" },
+                        "card_number": { "type": "string" },
+                        "expiryMonth": { "type": "string" },
+                        "expiryYear": { "type": "string" },
+                        "cvv": { "type": "string" },
+                        "amount": { "type": "string" },
+                        "currency": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pago realizado con éxito",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "mensaje": { "type": "string" },
+                      "response": {
+                        "type": "object",
+                        "properties": {
+                          "success": { "type": "boolean" },
+                          "message": { "type": "string" },
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "object",
+                                "properties": {
+                                  "message": { "type": "string" }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/shak-multas/multas/{identifier}": {
+        "get": {
+          "summary": "Obtiene multas por identificador",
+          "tags": ["Shak Multas"],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "identifier",
+              "schema": { "type": "string" },
+              "required": true,
+              "description": "Identificador único"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de multas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "identifier": { "type": "string" },
+                        "descripcion": { "type": "string" },
+                        "fecha": { "type": "string" },
+                        "valor": { "type": "number" },
+                        "pagada": { "type": "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
