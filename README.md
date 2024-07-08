@@ -63,7 +63,6 @@ Request Body:
 Response:
 
 ```json
-Copy code
 {
     "success": true,
     "message": "Transaction is successful.",
@@ -72,7 +71,8 @@ Copy code
             "message": "transaction is successful"
         }
     }
-}```
+}
+```
 ###Shak Tarjetas
 **POST /shak-tarjetas/register**
 
@@ -83,14 +83,16 @@ Request Body:
 ```json
 {
     "identifier": "PBO1234"
-}```
+}
+```
 Response:
 
 ```json
 {
     "message": "Identificador registrado",
     "identifier": "PBO1234"
-}```
+}
+```
 
 **POST /shak-tarjetas/recharge**
 
@@ -112,15 +114,16 @@ Request Body:
     "amount": "150.00",
     "currency": "USD",
     "identifier": "PBO1234"
-}```
+}
+```
 Response:
 
 ```json
-Copy code
 {
     "message": "Recarga exitosa",
     "newBalance": 150
-}```
+}
+```
 **POST /shak-tarjetas/charge**
 
 Charges an amount from a unique identifier.
@@ -128,11 +131,11 @@ Charges an amount from a unique identifier.
 Request Body:
 
 ```json
-Copy code
 {
     "identifier": "PBO1234",
     "amount": 75.00
-}```
+}
+```
 Response:
 
 ```json
@@ -140,7 +143,8 @@ Response:
     "message": "Cobro realizado",
     "identifier": "PBO1234",
     "newBalance": 75
-}```
+}
+```
 **POST /shak-tarjetas/checkIdentifier**
 
 Checks if an identifier exists.
@@ -150,14 +154,16 @@ Request Body:
 ```json
 {
     "identifier": "PBO1234"
-}```
+}
+```
 Response:
 
 ```json
 {
     "message": "Identificador existe",
     "identifier": "PBO1234"
-}```
+}
+```
 ###Shak Multas
 **POST /shak-multas/multas**
 
@@ -170,15 +176,16 @@ Request Body:
     "id": "PBO1234",
     "valor": 5000,
     "descripcion": "Mal estacionado"
-}```
+}
+```
 Response:
 
 ```json
-Copy code
 {
     "id": "nNjh0jU3QjDcOvgqGJfR",
     "mensaje": "Multa creada con éxito"
-}```
+}
+```
 **POST /shak-multas/multas/pagar**
 
 Pays an existing fine.
@@ -201,7 +208,8 @@ Request Body:
         "amount": "5000.00",
         "currency": "USD"
     }
-}```
+}
+```
 Response:
 
 ```json
@@ -216,7 +224,8 @@ Response:
             }
         }
     }
-}```
+}
+```
 **GET /shak-multas/multas/{identifier}**
 
 Gets fines by identifier.
@@ -249,7 +258,8 @@ Response:
         "valor": 100,
         "pagada": true
     }
-]```
+]
+```
 
 ## Swagger Documentation
 
@@ -272,5 +282,6 @@ api-gateway/
 │          ├── swagger.json
 │          └── swaggerSpec.js
 ├── package.json
-└── package-lock.json```
+└── package-lock.json
+```
 This README provides clear project description, installation instructions, list of endpoints, details on Swagger documentation, and project structure.
