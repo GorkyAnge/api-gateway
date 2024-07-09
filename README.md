@@ -267,37 +267,6 @@ Response:
 
 Este proyecto es un gestor de colas que utiliza RabbitMQ para manejar mensajes y colas. La API proporciona varios endpoints para crear y eliminar colas, consumir mensajes y enviar mensajes a través de un intercambio fanout.
 
-## Instalación
-
-1. Clona el repositorio
-    ```sh
-    git clone https://github.com/tu-usuario/queue-manager.git
-    ```
-2. Navega al directorio del proyecto
-    ```sh
-    cd queue-manager
-    ```
-3. Instala las dependencias
-    ```sh
-    npm install
-    ```
-4. Configura RabbitMQ (Asegúrate de tener un servidor RabbitMQ en funcionamiento)
-    ```sh
-    # Configuración de ejemplo en src/rabbitmq/config.js
-    module.exports = {
-        rabbitmqUrl: 'amqp://localhost',
-        queueName: 'your-queue-name',
-    };
-    ```
-
-## Uso
-
-Para iniciar el servidor:
-```sh
-npm start
-```
-
-El servidor estará disponible en http://localhost:3000.
 
 ## Endpoints
 Crear Intercambio
